@@ -1,7 +1,13 @@
 const express = require("express");
 const app = express();
 const http = require("http").createServer(app);
-const io = require("socket.io")(http);
+const io = require("socket.io")(http, {
+  cors: {
+    origin: "*", // Bạn có thể thay thế "*" bằng URL cụ thể mà bạn muốn cho phép.
+    methods: ["GET", "POST"],
+    credentials: true, // Cho phép gửi cookie qua WebSocket
+  },
+});
 const path = require("path");
 const cors = require("cors");
 let socketList = {};
